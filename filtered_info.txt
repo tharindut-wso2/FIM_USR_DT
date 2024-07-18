@@ -1,0 +1,16 @@
+Command: su tharindu2, Syscall:Execve, Timestamp: 2024-07-16 12:43:39, AUID: tharindu2, UID: tharindu3, Path: /lib/ld-linux-aarch64.so.1
+Command: Open the file, Syscall:Openat, Timestamp: 2024-07-16 12:44:48, AUID: tharindu2, UID: tharindu2, Path: /home/Confidential/confidential.txt
+Command: sudo -i, Syscall:Execve, Timestamp: 2024-07-16 12:45:06, AUID: tharindu2, UID: tharindu2, Path: /lib/ld-linux-aarch64.so.1
+Command: Open the file, Syscall:Openat, Timestamp: 2024-07-16 12:51:19, AUID: tharindu2, UID: root, Path: /home/Confidential/confidential.txt
+Command: su tharindu3, Syscall:Execve, Timestamp: 2024-07-16 12:52:24, AUID: tharindu2, UID: tharindu2, Path: /lib/ld-linux-aarch64.so.1
+Command: sudo -i, Syscall:Execve, Timestamp: 2024-07-16 12:52:34, AUID: tharindu2, UID: tharindu3, Path: /lib/ld-linux-aarch64.so.1
+Command: Open the file, Syscall:Openat, Timestamp: 2024-07-16 12:52:58, AUID: tharindu2, UID: root, Path: /home/Confidential/confidential.txt
+Command: Open the file, Syscall:Openat, Timestamp: 2024-07-16 12:53:24, AUID: tharindu2, UID: root, Path: /home/Confidential/confidential.txt
+Command: Open the file, Syscall:Openat, Timestamp: 2024-07-16 14:26:26, AUID: tharindu2, UID: root, Path: /home/Confidential/confidential.txt
+Command: su tharindu3, Syscall:Execve, Timestamp: 2024-07-16 14:26:47, AUID: tharindu2, UID: tharindu3, Path: /lib/ld-linux-aarch64.so.1
+Command: Open the file, Syscall:Openat, Timestamp: 2024-07-16 14:27:10, AUID: tharindu2, UID: tharindu3, Path: /home/Confidential/confidential.txt
+Command: Open the file, Syscall:Openat, Timestamp: 2024-07-16 14:51:39, AUID: tharindu2, UID: tharindu3, Path: /home/Confidential/confidential.txt, Conclusion: tharindu2has edit/home/Confidential/confidential.txtfile astharindu3
+Command: Open the file, Syscall:Openat, Timestamp: 2024-07-16 14:53:37, AUID: tharindu2, UID: tharindu3, Path: /home/Confidential/confidential.txt, Conclusion: tharindu2 has edit /home/Confidential/confidential.txt file as tharindu3
+Command: su -i, Syscall:Execve, Timestamp: 2024-07-16 14:53:50, AUID: tharindu2, UID: tharindu3, Path: /lib/ld-linux-aarch64.so.1, Conclusion: Switch
+Command: sudo -i, Syscall:Execve, Timestamp: 2024-07-16 14:53:56, AUID: tharindu2, UID: tharindu3, Path: /lib/ld-linux-aarch64.so.1, Conclusion: Switch
+Command: Open the file, Syscall:Openat, Timestamp: 2024-07-16 14:54:14, AUID: tharindu2, UID: root, Path: /home/Confidential/confidential.txt, Conclusion: tharindu2 has edit /home/Confidential/confidential.txt file as root
