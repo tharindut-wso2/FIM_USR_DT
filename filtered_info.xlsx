@@ -1,0 +1,20 @@
+Conclusion: tharindu2 has open /home/Confidential/confidential.txt file, Command: Open the file, Syscall:Openat, Timestamp: 2024-07-18 15:19:02, AUID: tharindu2, UID: tharindu2, Path: /home/Confidential/confidential.txt
+Conclusion: Switch User, Command: sudo -i, Syscall:Execve, Timestamp: 2024-07-18 15:19:26, AUID: tharindu2, UID: tharindu2, Path: /lib/ld-linux-aarch64.so.1
+Conclusion: tharindu2 has open /home/Confidential/confidential.txt file as root, Command: Open the file, Syscall:Openat, Timestamp: 2024-07-18 15:19:41, AUID: tharindu2, UID: root, Path: /home/Confidential/confidential.txt
+Conclusion: tharindu2 has open /home/Confidential/confidential.txt file as root, Command: Open the file, Syscall:Openat, Timestamp: 2024-07-18 15:20:57, AUID: tharindu2, UID: root, Path: /home/Confidential/confidential.txt
+Conclusion: Switch User, Command: su tharindu1, Syscall:Execve, Timestamp: 2024-07-18 15:21:09, AUID: tharindu2, UID: tharindu2, Path: /lib/ld-linux-aarch64.so.1
+Conclusion: tharindu2 has open /home/Confidential/confidential.txt file as tharindu1, Command: Open the file, Syscall:Openat, Timestamp: 2024-07-18 15:21:14, AUID: tharindu2, UID: tharindu1, Path: /home/Confidential/confidential.txt
+Conclusion: Switch User, Command: sudo nano /etc/audit/audit.rules, Syscall:Execve, Timestamp: 2024-07-18 15:37:19, AUID: tharindu2, UID: tharindu2, Path: /lib/ld-linux-aarch64.so.1
+Conclusion: Switch User, Command: sudo vi /etc/audit/rules.d/audit.rules, Syscall:Execve, Timestamp: 2024-07-18 15:37:26, AUID: tharindu2, UID: tharindu2, Path: /lib/ld-linux-aarch64.so.1
+Conclusion: Switch User, Command: sudo service auditd restart, Syscall:Execve, Timestamp: 2024-07-18 15:37:45, AUID: tharindu2, UID: tharindu2, Path: /lib/ld-linux-aarch64.so.1
+Conclusion: Switch User, Command: sudo nano /etc/audit/audit.rules, Syscall:Execve, Timestamp: 2024-07-18 15:37:48, AUID: tharindu2, UID: tharindu2, Path: /lib/ld-linux-aarch64.so.1
+Conclusion: Switch User, Command: sudo tail -f /var/log/audit/audit.log, Syscall:Execve, Timestamp: 2024-07-18 15:37:58, AUID: tharindu2, UID: tharindu2, Path: /lib/ld-linux-aarch64.so.1
+Conclusion: tharindu2 has open /home/Confidential/confidential.txt file, Command: Open the file, Syscall:Openat, Timestamp: 2024-07-18 16:00:29, AUID: tharindu2, UID: tharindu2, Path: /home/Confidential/confidential.txt
+Conclusion: tharindu2 has open /home/Confidential/confidential.txt file, Command: Open the file, Syscall:Openat, Timestamp: 2024-07-18 16:48:01, AUID: tharindu2, UID: tharindu2, Path: /home/Confidential/confidential.txt
+Conclusion: tharindu2 has open /home/Confidential/confidential.txt file, Command: Open the file, Syscall:Openat, Timestamp: 2024-07-18 16:48:22, AUID: tharindu2, UID: tharindu2, Path: /home/Confidential/confidential.txt
+Conclusion: Switch User, Command: su tharindu1, Syscall:Execve, Timestamp: 2024-07-18 16:48:34, AUID: tharindu2, UID: tharindu2, Path: /lib/ld-linux-aarch64.so.1
+Conclusion: tharindu2 has open /home/Confidential/confidential.txt file as tharindu1, Command: Open the file, Syscall:Openat, Timestamp: 2024-07-18 16:49:08, AUID: tharindu2, UID: tharindu1, Path: /home/Confidential/confidential.txt
+Conclusion: Switch User, Command: su tharindu2, Syscall:Execve, Timestamp: 2024-07-18 16:49:58, AUID: tharindu2, UID: tharindu1, Path: /lib/ld-linux-aarch64.so.1
+Conclusion: Switch User, Command: sudo -i, Syscall:Execve, Timestamp: 2024-07-18 16:50:07, AUID: tharindu2, UID: tharindu2, Path: /lib/ld-linux-aarch64.so.1
+Conclusion: tharindu2 has open /home/Confidential/confidential.txt file as root, Command: Open the file, Syscall:Openat, Timestamp: 2024-07-18 16:50:21, AUID: tharindu2, UID: root, Path: /home/Confidential/confidential.txt
+Conclusion: Switch User, Command: sudo auditctl -l, Syscall:Execve, Timestamp: 2024-07-18 16:53:04, AUID: tharindu2, UID: tharindu2, Path: /lib/ld-linux-aarch64.so.1

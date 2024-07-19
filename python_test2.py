@@ -105,7 +105,7 @@ def follow_log(input_file, output_file):
             syscall_info, capture, buffer = process_log_line(line, syscall_info, capture, buffer, output_file)
 
 input_file = '/var/log/audit/audit.log'  
-output_file = '/home/tharindu2/python_test1/filtered_info.xlsx'  
+output_file = '/home/tharindu2/FIM_repo/FIM_single_file/filtered_info.xlsx'  
 
 # Call the function to process logs in real-time
 follow_log(input_file, output_file)
