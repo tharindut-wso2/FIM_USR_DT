@@ -5,7 +5,7 @@ from datetime import datetime
 def process_log_line(line, syscall_info, capture, buffer, output_file):
     
     #trackiung the openat syscall using the number (openat and the execve)
-    if re.search(r'syscall=(56|221)', line):
+    if re.search(r'syscall=56', line):
 
         global openat 
         openat = 0
@@ -23,13 +23,13 @@ def process_log_line(line, syscall_info, capture, buffer, output_file):
         auid = re.search(r' AUID="([^"]+)"', line).group(1)
         uid = re.search(r' UID="([^"]+)"', line).group(1)
         
-        if re.search(r'syscall=221', line):  #for the track the cmd 
-            syscall_info['Syscall'] = 'Execve'
-            
-        else:
-            syscall_info['cmd'] = 'Open the file'
-            syscall_info['Syscall'] = 'Openat'
-            openat = 1
+        # if re.search(r'syscall=221', line):  #for the track the cmd 
+        #     syscall_info['Syscall'] = 'Execve' 
+        # else:
+
+        syscall_info['cmd'] = 'Open the file'
+        syscall_info['Syscall'] = 'Openat'
+        openat = 1
 
 
         syscall_info.update({
@@ -38,14 +38,14 @@ def process_log_line(line, syscall_info, capture, buffer, output_file):
             'uid': uid
         })
 
-    elif capture and re.match(r'^type=EXECVE', line):
-        buffer.append(line)
+    # elif capture and re.match(r'^type=EXECVE', line):
+    #     buffer.append(line)
 
-        # Extract command
-        cmd_parts = []
-        for match in re.finditer(r'a\d+="([^"]+)"', line):
-            cmd_parts.append(match.group(1))
-        syscall_info['cmd'] = ' '.join(cmd_parts)
+    #     # Extract command
+    #     cmd_parts = []
+    #     for match in re.finditer(r'a\d+="([^"]+)"', line):
+    #         cmd_parts.append(match.group(1))
+    #     syscall_info['cmd'] = ' '.join(cmd_parts)
 
     # elif capture and re.match(r'^type=CWD', line):
     #     buffer.append(line)
@@ -70,6 +70,10 @@ def process_log_line(line, syscall_info, capture, buffer, output_file):
         if path_match:
             path = path_match.group(1)
             if re.search(r'nametype=PARENT', line):
+                
+                if path == "./":
+                    capture = 0
+
                 syscall_info['parent_path'] = path
             elif re.search(r'nametype=NORMAL', line):
                 syscall_info['file_path'] = path
@@ -84,7 +88,7 @@ def process_log_line(line, syscall_info, capture, buffer, output_file):
         # if 'path' in syscall_info:
         if 'parent_path' in syscall_info and 'file_path' in syscall_info:
 
-            
+
             full_path = f"{syscall_info['parent_path']}/{syscall_info['file_path']}"
             # full_path = syscall_info['cwd'] + syscall_info['path'] if 'cwd' in syscall_info else syscall_info['path']
 
