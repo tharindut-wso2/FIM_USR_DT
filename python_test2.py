@@ -47,40 +47,67 @@ def process_log_line(line, syscall_info, capture, buffer, output_file):
             cmd_parts.append(match.group(1))
         syscall_info['cmd'] = ' '.join(cmd_parts)
 
+    # elif capture and re.match(r'^type=CWD', line):
+    #     buffer.append(line)
+    #     # Extract current working directory
+    #     cwd = re.search(r'cwd="([^"]+)"', line).group(1)
+    #     syscall_info['cwd'] = cwd
+
+    # elif capture and re.match(r'^type=PATH', line):
+    #     buffer.append(line)
+
+        # Extract file path
+        # path_match = re.search(r'name="([^"]+)"', line)
+        # if path_match:
+        #     path = path_match.group(1)
+        #     if path.startswith('/'):
+        #         syscall_info['path'] = path
+
     elif capture and re.match(r'^type=PATH', line):
         buffer.append(line)
-
         # Extract file path
         path_match = re.search(r'name="([^"]+)"', line)
         if path_match:
             path = path_match.group(1)
-            if path.startswith('/'):
-                syscall_info['path'] = path
-
+            if re.search(r'nametype=PARENT', line):
+                syscall_info['parent_path'] = path
+            elif re.search(r'nametype=NORMAL', line):
+                syscall_info['file_path'] = path
+    
     elif capture and re.match(r'^type=PROCTITLE', line):
+
         buffer.append(line)
 
-        # Process the complete information and reset
-        if 'path' in syscall_info:
-            full_path = syscall_info['path']
+        #if (syscall_info['path'] != '/lib/ld-linux-aarch64.so.1'): 
+    # Process the complete information and reset
+
+        # if 'path' in syscall_info:
+        if 'parent_path' in syscall_info and 'file_path' in syscall_info:
+
+            
+            full_path = f"{syscall_info['parent_path']}/{syscall_info['file_path']}"
+            # full_path = syscall_info['cwd'] + syscall_info['path'] if 'cwd' in syscall_info else syscall_info['path']
 
             syscall_info['conclusion'] = 'Switch User'
 
-            #create a conclusion with IDs
+                #create a conclusion with IDs
             if openat == 1:
                 if syscall_info['auid'] != syscall_info['uid']:
-                    syscall_info['conclusion'] = syscall_info['auid'] + ' has open ' + syscall_info['path'] + ' file as ' + syscall_info['uid']
+                    syscall_info['conclusion'] = syscall_info['auid'] + ' has edit ' + full_path + ' file as ' + syscall_info['uid']
                 else:
-                    syscall_info['conclusion'] = syscall_info['auid'] + ' has open ' + syscall_info['path'] + ' file'
+                    syscall_info['conclusion'] = syscall_info['auid'] + ' has edit ' + full_path + ' file'
 
-            # Convert the timestamp to a human-readable format
+                # Convert the timestamp to a human-readable format
             human_readable_timestamp = datetime.fromtimestamp(float(syscall_info['timestamp'])).strftime('%Y-%m-%d %H:%M:%S')
 
             with open(output_file, 'a') as outfile:
-                #outfile.write(f"Command: {syscall_info['cmd']}, Syscall:{syscall_info['Syscall']}, Timestamp: {human_readable_timestamp}, AUID: {syscall_info['auid']}, UID: {syscall_info['uid']}, Path: {full_path}, Conclusion: {syscall_info['conclusion']}\n")
-                outfile.write(f"Conclusion: {syscall_info['conclusion']}, Command: {syscall_info['cmd']}, Syscall:{syscall_info['Syscall']}, Timestamp: {human_readable_timestamp}, AUID: {syscall_info['auid']}, UID: {syscall_info['uid']}, Path: {full_path}\n")
+                    #outfile.write(f"Command: {syscall_info['cmd']}, Syscall:{syscall_info['Syscall']}, Timestamp: {human_readable_timestamp}, AUID: {syscall_info['auid']}, UID: {syscall_info['uid']}, Path: {full_path}, Conclusion: {syscall_info['conclusion']}\n")
+                    outfile.write(f"Conclusion: {syscall_info['conclusion']}, Command: {syscall_info['cmd']}, Syscall:{syscall_info['Syscall']}, Timestamp: {human_readable_timestamp}, AUID: {syscall_info['auid']}, UID: {syscall_info['uid']}, Path: {full_path}\n")
+
         buffer.clear()
-        capture = False
+        capture = False    
+
+            
     
     else:
         buffer.append(line)
