@@ -12,7 +12,7 @@ def process_log_line(line, syscall_info, capture, buffer, connection):
         global openat 
         openat = 0
         capture = True
-        buffer.append(line)
+        buffer.append(line)  
 
         # Extract timestamp, auid, and uid
         timestamp = re.search(r'audit\((\d+\.\d+)', line).group(1)
@@ -130,9 +130,6 @@ def follow_log(input_file):
                 continue
             
             syscall_info, capture, buffer = process_log_line(line, syscall_info, capture, buffer, connection)
-    
-    # cursor.close()
-    # cnx.close()
 
 input_file = '/var/log/audit/audit.log'  
 
