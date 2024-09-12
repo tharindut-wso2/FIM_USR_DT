@@ -45,6 +45,9 @@ CREATE TABLE Audit_Summary_Table (
 );
 """
 
+execute_query(connection, create_table_query)
+
+
 # execute_query(connection, create_table_query)
 
 insert_multiple_query = """
